@@ -1,0 +1,10 @@
+*.pyc
+__pycache__/
+*.egg-info
+.python-version
+*.code-workspace
+.vscode/
+build/
+examples/data
+examples/results
+examples/weights

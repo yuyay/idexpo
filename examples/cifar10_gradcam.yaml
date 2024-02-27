@@ -1,0 +1,35 @@
+seed: 1
+output_dir: results/
+num_workers: 8
+method: idexpo_gradcam
+model:
+  model_name: resnet18
+  layer_name: layer2[-1]
+  model_params:
+    segmentation: grid4x4
+  num_classes: 10
+  lamb1: 0.01
+  lamb2: 0.0001
+  cdel_n: 64
+  K: 0.5
+  cdel_temperature: 1.
+  del_step: 64
+  lr: 0.0001
+  pretrained: weights/resnet18_cifar10.pth
+  expl_loss_name: both
+  weight_scale: null
+  cdel_with_softmax: true
+  finetune_last_layers: false
+  ckpt_acc_thresh: 0.8
+  cdel_calculation: ratio
+datamodule:
+  data_root: data/
+  batchsize: 128
+trainer:
+  precision: 16
+  accelerator: gpu
+  devices: 1
+  max_epochs: 100
+  # val_check_interval: 1.0
+  check_val_every_n_epoch: 5
+  num_sanity_val_steps: 0
